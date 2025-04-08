@@ -2,7 +2,7 @@ import numpy as np
 from scipy.io import loadmat
 import os
 import os
-import shutil
+import math
 
 
 def convert_mat_to_npy(mat_file_path, save_dir):
@@ -25,7 +25,13 @@ gt_file_path = "mat_datasets/end3.mat"
 os.makedirs("tempwork", exist_ok=True)
 
 convert_mat_to_npy(mat_file_path, "tempwork")
-shutil.copy("tempwork/V.npy","datasets/samson/data.npy")
+data = np.load('tempwork/V.npy')
+height_width = int(math.sqrt(data.shape[1]))
+data = data.reshape((data.shape[0],height_width, height_width))
+np.save("datasets/samson/data.npy", data)
 
 convert_mat_to_npy(gt_file_path, "tempwork")
-shutil.copy("tempwork/A.npy","datasets/samson/gt.npy")
+data = np.load('tempwork/A.npy')
+height_width = int(math.sqrt(data.shape[1]))
+data = data.reshape((data.shape[0],height_width, height_width))
+np.save("datasets/samson/gt.npy", data)
