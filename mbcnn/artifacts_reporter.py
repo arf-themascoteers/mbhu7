@@ -1,7 +1,7 @@
 import os
 import clize
 import numpy as np
-from mbcnn import io
+from mbcnn import mbcnn_io
 
 EXTENSION = 1
 
@@ -21,7 +21,7 @@ def collect_artifacts_report(*,
     :param filename: Name of the file holding metrics.
         Defaults to 'inference_metrics.csv'
     """
-    all_metrics = io.load_metrics(experiments_path, filename)
+    all_metrics = mbcnn_io.load_metrics(experiments_path, filename)
     metric_keys = set(tuple(metric_keys)
                       for metric_keys in all_metrics['metric_keys'])
     assert len(metric_keys) == 1, \
@@ -39,10 +39,10 @@ def collect_artifacts_report(*,
             np.min(artifacts[key]), np.max(artifacts[key])
         ]
     if len(os.path.splitext(dest_path)[EXTENSION]) != 0:
-        io.save_metrics(dest_path, stat_report)
+        mbcnn_io.save_metrics(dest_path, stat_report)
     else:
         os.makedirs(dest_path, exist_ok=True)
-        io.save_metrics(dest_path, stat_report, 'report.csv')
+        mbcnn_io.save_metrics(dest_path, stat_report, 'report.csv')
 
 
 if __name__ == '__main__':

@@ -5,11 +5,11 @@ split it into train, test and val sets and save them in .h5 file with
 """
 
 import os
-
+import numpy as np
 import clize
 from clize.parameters import multi
 
-import mbcnn.io as io
+import mbcnn.mbcnn_io as io
 import mbcnn.preprocessing as preprocessing
 import mbcnn.utils as utils
 
@@ -120,4 +120,13 @@ def main(*,
 
 
 if __name__ == '__main__':
-    clize.run(main)
+    #clize.run(main)
+    main(
+        data_file_path="D:\\src\\mbhu7\\datasets\\samson\\data.npy",
+        ground_truth_path="D:\\src\\mbhu7\\datasets\\samson\\gt.npy",
+        train_size=[0.8],
+        val_size=0.1,
+        save_data=True,
+        output_path="output.h5",
+        use_unmixing=True
+    )

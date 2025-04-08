@@ -9,7 +9,7 @@ import numpy as np
 import tensorflow as tf
 
 from mbcnn import enums
-from mbcnn import io, transforms
+from mbcnn import mbcnn_io, transforms
 from mbcnn.models import RepeatVector5D, unmixing_linear
 from mbcnn.performance_metrics import \
     calculate_unmixing_metrics, UNMIXING_TRAIN_METRICS, cnn_rmse, \
@@ -63,7 +63,7 @@ def evaluate(data,
     else:
         raise ValueError('Model path does not exist.')
     test_dict = data[enums.Dataset.TEST]
-    min_, max_ = io.read_min_max(os.path.join(
+    min_, max_ = mbcnn_io.read_min_max(os.path.join(
         os.path.dirname(model_path), 'min-max.csv'))
     transformations = [] if data[enums.Dataset.NAME] == 'samson' else \
         [transforms.MinMaxNormalize(min_=min_, max_=max_)]
@@ -95,6 +95,6 @@ def evaluate(data,
     })
 
     model_metrics['inference_time'] = [inference_time]
-    io.save_metrics(dest_path=dest_path,
+    mbcnn_io.save_metrics(dest_path=dest_path,
                     file_name=enums.Experiment.INFERENCE_METRICS,
                     metrics=model_metrics)

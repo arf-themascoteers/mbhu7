@@ -1,0 +1,1 @@
+python prepare_data.py --data-file-path "D:\src\mbhu7\datasets\samson\data.npy" --ground-truth-path "D:\src\mbhu7\datasets\samson\gt.npy" --train-size 0.8 --val-size 0.1 --save-data --output-path output.h5

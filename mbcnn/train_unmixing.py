@@ -9,7 +9,7 @@ import numpy as np
 import tensorflow as tf
 
 from mbcnn import enums, models
-from mbcnn import io, transforms
+from mbcnn import mbcnn_io, transforms
 from mbcnn import time_metrics
 from mbcnn.models import get_index_of_named_layer, RepeatVector5D
 from mbcnn.performance_metrics import UNMIXING_LOSSES, \
@@ -126,7 +126,7 @@ def train(data: Dict[str, np.ndarray],
         history.history[time_metrics.TimeHistory.__name__] = \
             time_history.average
 
-    io.save_metrics(
+    mbcnn_io.save_metrics(
         dest_path=dest_path, file_name='training_metrics.csv',
         metrics=history if model_name == 'unmixing_svr' else history.history)
 
@@ -210,6 +210,6 @@ def train(data: Dict[str, np.ndarray],
         history.history[
             time_metrics.TimeHistory.__name__] = time_history.average
 
-        io.save_metrics(dest_path=dest_path,
+        mbcnn_io.save_metrics(dest_path=dest_path,
                         file_name='training_metrics_after_concatenation.csv',
                         metrics=history.history)
