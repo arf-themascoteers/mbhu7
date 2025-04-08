@@ -156,11 +156,11 @@ def run_experiments(*,
 if __name__ == '__main__':
     #clize.run(run_experiments)
     run_experiments(
-        data_file_path="D:\\src\\mbhu7\\datasets\\samson\\data.npy",
-        ground_truth_path = "D:\\src\\mbhu7\\datasets\\samson\\gt.npy",
+        data_file_path="..\\datasets\\samson\\data.npy",
+        ground_truth_path = "..\\datasets\\samson\\gt.npy",
         train_size=[0.8],
         model_name="unmixing_pixel_based_cnn",
-        dest_path="D:\\src\\mbhu7\\experiments\\samson_run",
+        dest_path="..\\experiments\\samson_run",
         sample_size=156,
         n_classes=3,
         channels_idx=0
